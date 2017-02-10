@@ -225,7 +225,7 @@ self.payWall = class {
 
     _getIsHighPriority() {
         // changing display mode
-        return this._regexTestOrBail(/mobileaction\=toggle_view_(mobile|desktop)/);
+        return this._regexTestOrBail(/mobileaction\=toggle_view_(mobile|desktop)|\/w\/inde\.php\?title\=Special\:UserLogout/);
     }
 
     _miscEarlyBailQualified() {
