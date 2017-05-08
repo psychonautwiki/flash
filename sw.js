@@ -1,4 +1,4 @@
-const CACHE = 'pw-apx-2';
+const CACHE = 'pw-apx-4';
 
 const wellKnown = [
     'https://metrics.psychonautwiki.org/sdk/web/countly.min.js'
