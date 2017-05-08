@@ -178,7 +178,7 @@ class payWall {
         }
 
         // Skip special path targets
-        if (!this._isHotPWProperty()) {
+        if (this._isHotPWProperty()) {
             return this._bypassCache();
         }
 
