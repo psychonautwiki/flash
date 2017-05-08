@@ -1,51 +1,7 @@
 const CACHE = 'pw-apx-2';
 
 const wellKnown = [
-    'https://metrics.psychonautwiki.org/sdk/web/countly.min.js',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/0/01/Eye.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/0/05/Bar-chart.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/0/08/Flask.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/2/25/Home.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/2/28/Wikipedia.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/3/35/List-ol.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/3/37/Random.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/3/39/Book.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/4/43/Reddit.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/4/43/Tumblr.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/5/52/Sitemap.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/6/60/External-link.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/6/64/Yt-icon.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/6/65/Calendar.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/6/6c/Image.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/8/82/Heart-o.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/9/91/Github.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/9/96/Instagram.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/9/9b/Wood.gif',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/a/a4/Envelope-o.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/a/ab/Newspaper-o.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/c/c1/Tasks.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/d/d2/History.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/d/d4/Onion.ico',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/d/d6/Exclamation-triangle.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/d/db/Twitter.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/images/f/f0/Facebook-square.svg',
-    'https://psychonautwiki.global.ssl.fastly.net/w/skins/Vector/images/arrow-down-icon.svg?f2c8d',
-    'https://psychonautwiki.global.ssl.fastly.net/w/skins/Vector/images/external-link-ltr-icon.svg?7426d',
-    'https://psychonautwiki.global.ssl.fastly.net/w/skins/Vector/images/search-ltr.svg?7f402',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Calendar.svg&width=37',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Drifting_cat_by_Anonymous.gif&width=525',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Image.svg&width=43',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Pencil.svg&width=34',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Star-o.svg&width=37',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=Tasks.svg&width=40',
-    'https://psychonautwiki.global.ssl.fastly.net/w/thumb.php?f=White_Wolf_Drinking_Water_by_Anonymous.gif&width=530',
-    'https://psychonautwiki.org/w/index.php?title=User:Apx/ReferenceTooltips.css&action=raw&ctype=text/css',
-    'https://psychonautwiki.org/w/index.php?title=User:Apx/ReferenceTooltips.js&action=raw&ctype=text/javascript',
-    'https://psychonautwiki.org/w/load.php?debug=false&lang=de&modules=ext.smw.style%7Cext.smw.tooltip.styles&only=styles&skin=vector',
-    'https://psychonautwiki.org/w/load.php?debug=false&lang=de&modules=ext.uls.nojs%7Cext.visualEditor.desktopArticleTarget.noscript%7Cmediawiki.helplink%2CsectionAnchor%7Cmediawiki.legacy.commonPrint%2Cshared%7Cmediawiki.page.gallery.styles%7Cmediawiki.skinning.interface%7Cmediawiki.special.changeslist%7Cmediawiki.special.changeslist.enhanced%2Clegend%7Cskins.vector.styles&only=styles&skin=vector',
-    'https://psychonautwiki.org/w/load.php?debug=false&lang=de&modules=site&only=styles&skin=vector',
-    'https://psychonautwiki.org/w/load.php?debug=false&lang=de&modules=startup&only=scripts&skin=vector',
-    'https://psychonautwiki.org/w/resources/src/mediawiki.legacy/images/spinner.gif?ca65b'
+    'https://metrics.psychonautwiki.org/sdk/web/countly.min.js'
 ];
 
 const clearCaches = () =>
@@ -141,6 +97,10 @@ class payWall {
         return this._regexTestOrBail(/^https?:\/\/(h.)?psychonaut(.wiki|wiki\.org|.(.*?).fastly.net)/);
     }
 
+    _isHotPWProperty() {
+        return this._regexTestOrBail(/\/katharsis\.json$/);
+    }
+
     _isPWNonProperty() {
         return this._regexTestOrBail(/^https?:\/\/cdn.ravenjs.com/);
     }
@@ -214,6 +174,11 @@ class payWall {
 
         // Skip domains outside of PW scope
         if (!this._isPWProperty() && !this._isPWNonProperty()) {
+            return this._bypassCache();
+        }
+
+        // Skip special path targets
+        if (!this._isHotPWProperty()) {
             return this._bypassCache();
         }
 
