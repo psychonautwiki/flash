@@ -1,7 +1,12 @@
-const CACHE = 'pw-apx-4';
+const CACHE = 'pw-apx-5';
 
 const wellKnown = [
-    'https://metrics.psychonautwiki.org/sdk/web/countly.min.js'
+    /* Analytics warmup */
+    "https://psychonautwiki.global.ssl.fastly.net/metrics/sdk/web/countly.min.js",
+    "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js",
+    
+    /* Sociopata Persistent Prefetch-Telemetry Experiment */
+    "https://s.psychonautwiki.org/_"
 ];
 
 const clearCaches = () =>
@@ -25,17 +30,17 @@ self.addEventListener('install', evt => {
     evt.waitUntil(
         clearCaches()
         .then(prefetchWellKnown)
-        .then(() => self.skipWaiting())
+        .then(() => self['skipWaiting']())
     );
 });
 
 // when waiting is skipped, force this version
 // of flash to take over all open pages
 self.addEventListener('activate', evt => {
-    evt.waitUntil(self.clients.claim());
+    evt.waitUntil(self['clients']['claim']());
 });
 
-class payWall {
+class Flash {
     constructor(evt) {
         this._evt = evt;
 
@@ -221,5 +226,5 @@ class payWall {
 };
 
 self.addEventListener('fetch', evt => {
-    new payWall(evt);
+    new Flash(evt);
 });
